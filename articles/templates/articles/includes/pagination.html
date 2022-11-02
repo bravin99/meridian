@@ -1,0 +1,32 @@
+<div class="pagination mt-4 d-flex justify-content-center">
+    <div class="d-grid gap-2 d-md-block">
+        {% if page_obj.has_previous %}
+        <a class="btn btn-dark" href="?page={{page_obj.preveous_page_number}}">
+            <span class="bi-chevron-double-left"></span>
+        </a>
+            {% if page_obj.number > 3 %}
+                <a class="btn btn-dark" href="?page=1">1</a>
+                {% if page_obj.number > 4 %}
+                <span class="btn btn-dark">...</span>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="btn btn-outline-dark fw-bold text-success">{{num}}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-dark" href="?page={{num}}">{{num}}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            {% if page_obj.number < page_obj.paginator.num_pages|add:'-3' %}
+            <span class="btn btn-dark">...</span>
+            <a class="btn btn-dark" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+            {% elif page_obj.number < page_obj.paginator.num_pages|add:'-2' %}
+            <a class="btn btn-dark" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+            {% endif %}
+            <a class="btn btn-dark" href="?page={{ page_obj.next_page_number }}">
+                <span class="bi-chevron-double-right"></span></a>
+        {% endif %}
+    </div>
+</div>

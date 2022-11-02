@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-3">
+    <div class="row mt-3">
+        <h2 class="text-center"> Results </h2>
+    </div>
+
+    {% if objects %}
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+        {% for obj in objects %}
+            {% include 'articles/includes/article_obj.html' %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="mt-4">
+        <h3 class="text-center text-danger"> Your search yielded no results, try adjusting your query.</h3>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

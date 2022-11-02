@@ -1,0 +1,97 @@
+{% load crispy_forms_tags %}
+<!-- comments -->
+<div class="card bg-body-light mb-4 border-0 mt-3">
+    <div class="card-body">
+        <h3 class="text-uppercase text-center">Add new comment </h3>
+        <!-- comment form -->
+        <div class="col-sm-12 d-flex justify-content-center">
+            {% if user.is_authenticated %}
+            <form class="mb-4" method="post" id="main_form">
+                {% csrf_token %}
+                <div>
+                    {{ comment_form.message|as_crispy_field}}
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input type="submit" value="Post" class="btn btn-outline-info btn-sm"/>
+                </div>
+            </form>
+            {% else %}
+            <h4 class="fw-bold text-danger mt-3 mb-4"> <em class="bi bi-lock"></em>
+                <a href="{% url 'account_login' %}" class="text-decoration-none">Login</a> Required to add comment
+            </h4>
+            {% endif %}
+        </div>
+        <!-- num comments -->
+        <h4 class="text-uppercase text-center">{{comments.count}} comment{{comments.count|pluralize}}</h4>
+        <!-- list comments -->
+        <div class="comments">
+            {% for comment in comments %}
+            {% if comment.is_parent %}
+            <div class="d-flex flex-start mb-3">
+                <span class="rounded-circle shadow-1-strong me-3">
+                    <em class="bi bi-person display-6"></em>
+                </span>
+                <div class="flex-grow-1 flex-shrink-1">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="mb-1">
+                            {{comment.user.username}} <span class="small"> - {{comment.created}}</span>
+                        </p>
+                    </div>
+                    <p class="small mb-0">{{comment.message}}</p>
+                    <!-- reply accordion -->
+                    <div class="accordion accordion-flush mt-2" id="accordionFlushReply">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="flush-heading{{comment.pk}}">
+                                <button class="accordion-button collapsed text-light bg-body-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{comment.pk}}" aria-expanded="false" aria-controls="flush-collapse-{{comment.pk}}">
+                                    <em class="bi bi-reply"> </em> &nbsp;&nbsp; reply
+                                </button>
+                            </h3>
+                            <div id="flush-collapse-{{comment.pk}}" class="accordion-collapse collapse bg-body-light" aria-labelledby="flush-heading{{comment.pk}}" data-bs-parent="#accordionFlushReply">
+                                <div class="accordion-body">
+                                    {% if user.is_authenticated %}
+                                    <form method="POST" id="main_form" class="comment_form">
+                                        {% csrf_token %}
+                                        <div>
+                                            {{comment_form.message|as_crispy_field}}
+                                        </div>
+                                        <input type="hidden" value="{{comment.pk}}" name="parent"/>
+                                        <div class="d-flex justify-content-center">
+                                            <input type="submit" value="reply" class="btn btn-primary btn-sm">
+                                        </div>
+                                    </form>
+                                    {% else %}
+                                    <span class="text-danger fw-bold"><em class="bi-lock"></em> 
+                                        <a href="{% url 'account_login' %}" class="text-decoration-none">Login</a> Required to reply
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <!-- start reply list -->
+            {% for reply in comment.children %}
+            <div class="d-flex flex-start mt-2 ms-5 mb-3">
+                <div class="vr"></div>
+                <a class="me-3" title="{{reply.user.username}}" href="#">
+                    <span class="rounded-circle shadow-1-strong me-3">
+                        <em class="bi bi-person display-6"></em>
+                    </span>
+                </a>
+                <div class="flex-grow-1 flex-shrink-1">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="mb-1">{{reply.user.username}} <span class="small"> - {{reply.created}}</span></p>
+                    </div>
+                    <p class="mb-1">{{reply.message}}</p>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- end reply lists-->
+            {% endfor %}
+        </div>
+        <!-- end comment list -->
+    </div>
+</div>
+<!-- end comments -->

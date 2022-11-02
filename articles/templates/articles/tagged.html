@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <div class="row mt-3">
+        <h4 class="text-center text-uppercase"> Tagged with {{ tag.name }} </h4>
+    </div>
+
+    {% if objects %}
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+        {% for obj in objects %}
+            {% include 'articles/includes/article_obj.html' %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="mt-4">
+        <h3 class="text-center text-danger"> No posts contain this tag.</h3>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

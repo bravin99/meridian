@@ -1,0 +1,25 @@
+{% load static %}
+{% load humanize %}
+
+<div class="col">
+    <div class="card h-100 bg-body-light shadow">
+        <a href="{{obj.get_absolute_url}}" class="text-decoration-none" title="{{obj.title}}">
+            <img src="{{obj.featured_image.url}}" class="card-img-top" height="200" width="200" alt="{{obj.title}}-image">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title" title="{{obj.title}}">
+                <a href="{{obj.get_absolute_url}}" class="text-decoration-none text-light"> {{obj.title|truncatewords:"10"}} </a>
+            </h5>
+            {% for tag in obj.tags.all %}
+            <span class="tag-badge">
+                <a href="{% url 'tagged' tag.slug %}" class="text-dark text-decoration-none">{{tag.name}}</a>
+            </span>
+            {% endfor %}
+        </div>
+        <div class="card-footer row">
+            <div class="col-sm-12 d-flex justify-content-center">
+                <small class="text-muted"> {{obj.created|naturalday}} </small>
+            </div>            
+        </div>
+    </div>
+</div>
