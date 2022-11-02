@@ -53,7 +53,7 @@ class Article(ContentAppBaseModel):
 class Comments(ContentAppBaseModel):
     parent_article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="comments")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_comments")
-    message = models.TextField(max_length=100)
+    message = models.TextField(max_length=100, help_text="< 100 chars")
     display = models.BooleanField(default=True)
     parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
     
