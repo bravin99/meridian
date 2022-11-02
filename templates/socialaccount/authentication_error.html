@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block head_title %}{% trans "Social Network Login Failure" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="text-center">{% trans "Social Network Login Failure" %}</h3>
+    <p class="text-center text-family">{% trans "An error occurred while attempting to login via your social network account." %}</p>
+</div>
+{% endblock %}

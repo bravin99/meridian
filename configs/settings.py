@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 
     "allauth",
     "allauth.account",
+    "allauth.socialaccount",
     "crispy_forms",
     "crispy_bootstrap5",
 
@@ -54,7 +55,7 @@ ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400 #1 day
 
 ACCOUNT_LOGOUT_REDIRECT_URL = '/' 
-LOGIN_REDIRECT_URL = '/profile'
+LOGIN_REDIRECT_URL = '/accounts/profile'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
