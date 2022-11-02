@@ -80,7 +80,7 @@
                 <ul class="nav flex-column">
                     {% for obj in related %}
                     <li class="nav-item">
-                      <a class="nav-link" href="#">
+                      <a class="nav-link" href="{{obj.get_absolute_url}}">
                           {{obj.title}} <em class="text-muted"> |{{obj.created|naturaltime}}</em>
                       </a>
                     </li>

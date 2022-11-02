@@ -23,3 +23,7 @@ Simple blogging website built with [Python]Django
 ### Search Page
 
 ![Search page](/images/search_page.png)
+
+### Profile page 
+
+![profile page](/images/profile.png)

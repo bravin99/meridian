@@ -54,13 +54,13 @@
                   {% if user.is_authenticated %}
                   <li class="nav-item dropdown">
                     <a class="nav-link text-uppercase" href="#" data-bs-toggle="dropdown" data-bs-target="user-dropdown" data-bs-auto-close="outside" aria-expanded="false" title="Account options">
-                      <img src="{% if user.avatar %}{{user.avatar.url}}{% else %}{% static 'img/default_avatar.jpg' %}{% endif %}" alt="user-avatar" class="rounded-circle img-responsive" height="36" width="36" style="padding:3px;"/> 
-                      <span class="d-none d-xl-inline-block ml-1 fw-bold" style="font-size:12px">{{user.username}}</span>
+                      <img src="{% if user.avatar %}{{user.avatar.url}}{% else %}{% static 'img/default_avatar.jpg' %}{% endif %}" alt="user-avatar" class="rounded-circle img-responsive" height="36" width="36"/> 
+                      <span class="d-none d-xl-inline-block ml-1 fw-bold">{{user.username}}</span>
                       <em class="bi bi-chevron-down d-none d-xl-inline-block"></em>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end user-dropdown">
                       <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                      <li><a class="dropdown-item" href="#">Settings</a></li>
+                      <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item text-danger" href="{% url 'account_logout' %}">
                         <em class="bi bi-box-arrow-left"></em>Logout</a>
