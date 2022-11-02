@@ -1,9 +1,11 @@
+from django.contrib.auth import get_user_model
 from django.db import models
+from django.template.defaultfilters import slugify
+from django.urls import reverse
 from taggit.managers import TaggableManager
 from taggit.models import TaggedItemBase
-from django.template.defaultfilters import slugify
-from django.contrib.auth import get_user_model
-from django.urls import reverse
+from tinymce.models import HTMLField
+
 User = get_user_model()
 
 class ContentAppBaseModel(models.Model):
@@ -22,7 +24,7 @@ class Article(ContentAppBaseModel):
     slug = models.SlugField(unique=True, max_length=160)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     featured_image = models.ImageField(upload_to=featured_image_path)
-    content = models.TextField()
+    content = HTMLField()
     tags = TaggableManager(through=TaggedArticle)
     publish = models.BooleanField(default=True)
     views = models.PositiveIntegerField(blank=True, null=True, editable=False)
