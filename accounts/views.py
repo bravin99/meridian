@@ -4,9 +4,7 @@ from django.shortcuts import render
 User = get_user_model()
 
 
-def profile(request, username):
-    user = User.objects.get(username=username)
-    context = {
-        "user": user,
-    }
+def profile(request):
+    user = request.user
+    context = {}
     return render(request, "accounts/profile.html", context)
