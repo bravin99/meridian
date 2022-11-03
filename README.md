@@ -2,7 +2,7 @@
 
 Simple blogging website built with [Python]Django
 
-## Blog Pages
+## App Pages
 
 ### Home Page
 

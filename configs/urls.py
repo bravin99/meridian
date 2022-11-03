@@ -9,6 +9,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("tinymce/", include("tinymce.urls")),
     path("", include("articles.urls")),
+    path("contact/", include("contact.urls")),
 ]
 
 if settings.DEBUG:

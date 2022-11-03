@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     "accounts",
     "articles",
+    "contact",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
