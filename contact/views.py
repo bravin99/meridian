@@ -13,4 +13,5 @@ class ContactCreateView(CreateView):
     
     def form_valid(self, form):
         self.object = form.save()
+        messages.success(self.request, "Contact sent successfully")
         return redirect("contact")

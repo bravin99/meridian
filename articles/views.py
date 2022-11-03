@@ -51,6 +51,7 @@ class ArticleDetailView(DetailView):
                 parent_article = self.get_object(), user=user, message=message, parent=parent
             )
             new_comment.save()
+            messages.success(request, "Comment added successfully")
             return redirect(self.request.path_info)
 
 def tagged(request, tag_slug):
@@ -69,11 +70,11 @@ def favourite_articles(request, slug):
     try:
         fav = Favourite.objects.get(user=user, fav_article=tutorial)
         fav.delete()
-        messages.success(request, 'Removed from favourites!')
+        messages.success(request, f'Removed "{fav.fav_article.title}" from favourites!')
     except ObjectDoesNotExist:
         fav = Favourite(user=user, fav_article=tutorial)
         fav.save()
-        messages.success(request, 'Added to favourites!')
+        messages.success(request, f'Added "{fav.fav_article.title}" to favourites!')
         
     return redirect(tutorial.get_absolute_url())
 

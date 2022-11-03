@@ -7,6 +7,7 @@ from django.views.generic import TemplateView
 from accounts.forms import UserUpdateForm, ProfileForm
 
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 User = get_user_model()
 
@@ -14,6 +15,7 @@ User = get_user_model()
 @login_required
 def profile(request):
     user = request.user
+    messages.success(request, "welcome to your profile")
     favorites = Favourite.objects.filter(user=user)
     articles = Article.objects.filter(publish=True).order_by("-created")
 
@@ -39,6 +41,7 @@ def settings(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            messages.success(request, "Details updated successfully")
     else:
         user_form = UserUpdateForm(instance=user)
         profile_form = ProfileForm(instance=profile)

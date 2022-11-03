@@ -85,6 +85,21 @@
         </nav>
 
         <main class="mb-5">
+			<!-- messages -->
+          {% if messages %}
+            <div>
+              {% for message in messages %}
+                <div class="container-fluid p-0">
+						<div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+							<button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close">
+							</button>
+							{{message}}
+						</div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+			 <!-- end messages -->
             {% block content %} {% endblock %}
         </main>
 
