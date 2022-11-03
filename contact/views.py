@@ -11,6 +11,6 @@ class ContactCreateView(CreateView):
     form_class = ContactForm
     template_name = "contact/contact.html"
     
-    def get_success_url(self) -> str:
-        messages.success(self.request, "Contact submitted successfully")
-        return redirect(self.request.path_info)
+    def form_valid(self, form):
+        self.object = form.save()
+        return redirect("contact")
