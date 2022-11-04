@@ -24,10 +24,14 @@ Simple blogging website built with [Python]Django
 
 ![Search page](/images/search_page.png)
 
-### Profile page 
+### Profile page
 
 ![profile page](/images/profile.png)
 
 ### Update Details Page
 
 ![Settings page](/images/update-details.png)
+
+### Sitemaps.xml
+
+![Sitemaps](/images/sitemaps.png)
